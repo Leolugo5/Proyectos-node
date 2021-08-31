@@ -1,9 +1,10 @@
+//ESATA ES UNA PRUEBA PARA SABER SI SE ACTUALIZO MI REPO
+
 //Imports de los módulos
 const fs = require("fs/promises");
 const path = require("path");
 
 const readFileUsers = () => {
-    //Imprimir en consola el arreglo de usuarios nota extra
     const usersPath = path.resolve("./users.json");
     try {
         const data = fs.readFile(usersPath, "utf8");
@@ -14,7 +15,6 @@ const readFileUsers = () => {
 };
 
 const writeHelloWorld = () => {
-    //Escribir hello world! en el archivo hello.txt
     const helloPath = path.resolve("./hello.txt");
     try {
         fs.writeFile(helloPath, "hello world!");
@@ -24,22 +24,19 @@ const writeHelloWorld = () => {
 };
 
 const addUser = async (username) => {
-    //Agregar un usuario en la lista users.json
     const usersPath = path.resolve("./users.json");
     try{
         const data = await fs.readFile(usersPath, "utf8");
-        const users = JSON.parse(data); //Convertir de JSON a objeto
+        const users = JSON.parse(data);
         users.push(username);
         await fs.writeFile(usersPath, JSON.stringify(users));
     } catch(error){
         console.log(error);
     }
 };
-
-//No hace falta ejecutar las funciones
-
 module.exports = {
     readFileUsers,
     writeHelloWorld,
     addUser,
 };
+
