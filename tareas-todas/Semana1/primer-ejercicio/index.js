@@ -1,42 +1,44 @@
-//ESATA ES UNA PRUEBA PARA SABER SI SE ACTUALIZO MI REPO
+// modulos core de node.js
 
-//Imports de los módulos
-const fs = require("fs/promises");
-const path = require("path");
+//https (para crear un servidor o hacer peticiones)
+//fs (para manejo de archivos)
+//path (para construccion de rutas hacia archivos o directorios)
+//events (para manejo de eventos)
+//----------------------------------------------------------------
+//importtar un modulo en node.js
+// const modulo = require('modulo')
 
-const readFileUsers = () => {
-    const usersPath = path.resolve("./users.json");
-    try {
-        const data = fs.readFile(usersPath, "utf8");
-        console.log(data);
-    } catch (error) {
-        console.log(error);
+const fs = require('fs')
+
+//l¿Leer archivos con fs (Asincrono)
+
+fs.readFile("saludo.txt", { encoding: "utf-8" }, (err, data) => {
+    if (!err) {
+        console.log(data)
+    } else {
+        console.log(err)
     }
-};
+})
 
-const writeHelloWorld = () => {
-    const helloPath = path.resolve("./hello.txt");
-    try {
-        fs.writeFile(helloPath, "hello world!");
-    } catch (error) {
-        console.log(error);
+
+const data = fs.readFileSync("saludo.txt", { encoding: "utf-8" }) //Sincrono
+console.log(data)
+
+// Sobre-escribe el contenido de frma Asincrona
+fs.writeFile("saludo.txt", "Aqui nomas probando 123, 123", (err) => {
+    if(err) {
+        console.log(err)
+    } else {
+        console.log("Escritura en el archivo completa")
     }
-};
+})
 
-const addUser = async (username) => {
-    const usersPath = path.resolve("./users.json");
-    try{
-        const data = await fs.readFile(usersPath, "utf8");
-        const users = JSON.parse(data);
-        users.push(username);
-        await fs.writeFile(usersPath, JSON.stringify(users));
-    } catch(error){
-        console.log(error);
+
+// Agrega contenido al archivo de forma Asincrona
+fs.appendFile("saludo.txt", "esto es para agregar datos al archivo", (err) => {
+    if(err) {
+        console.log(err)
+    } else {
+        console.log("Escritura en el archivo completa")
     }
-};
-module.exports = {
-    readFileUsers,
-    writeHelloWorld,
-    addUser,
-};
-
+})
